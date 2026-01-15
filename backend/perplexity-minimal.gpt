@@ -1,0 +1,12 @@
+llm: perplexity:pro
+
+tools:
+  - github.com/perplexity/api/browser
+
+args:
+  url: "https://blog.reedsy.com/short-story/ktns1d/"
+
+steps:
+  1. Open the URL ${url} and extract the main page text.
+  2. Summarize the page content in 50 words or less.
+  3. Print the summary.

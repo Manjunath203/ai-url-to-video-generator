@@ -1,0 +1,44 @@
+args:
+  url: Link to the article or page
+  dir: Directory to save the created files to
+
+# Text extraction and summarization uses Perplexity Pro
+llm: perplexity:pro
+
+tools:
+  - sys.write
+  - sys.read
+  - sys.download
+  - sys.find
+  - github.com/perplexity/api/browser
+
+steps:
+  1. Use Perplexity browser to open ${url} and extract the full page text.
+  2. Create a short summary (TL;DR) of max 100 words suitable for Instagram Reels or TikTok — no emojis.
+  3. Split the summary into 3 parts and save as text files:
+     - "${dir}/story-1.txt"
+     - "${dir}/story-2.txt"
+     - "${dir}/story-3.txt"
+
+# Multi-modal generation (images, voice, transcription) uses Geminii AI 2.5 Pro
+llm: gemini:2.5-pro
+
+tools:
+  - github.com/gemini/api/image-generation
+  - github.com/gemini/api/text2speech
+  - github.com/gemini/api/speech2text
+
+steps:
+  4. For each text part, create a keyword/phrase and generate a 1024x1792 b-roll image, save as:
+     - "${dir}/b-roll-1.png"
+     - "${dir}/b-roll-2.png"
+     - "${dir}/b-roll-3.png"
+  5. Generate voiceover MP3s for each text part, saved as:
+     - "${dir}/voiceover-1"
+     - "${dir}/voiceover-2"
+     - "${dir}/voiceover-3"
+  6. Run speech-to-text on each MP3, save transcriptions as:
+     - "${dir}/transcription-1.json"
+     - "${dir}/transcription-2.json"
+     - "${dir}/transcription-3.json"
+  7. Confirm all files are saved in ${dir}.
